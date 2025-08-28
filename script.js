@@ -25,36 +25,27 @@ for (let i = 0; i < heart.length; i++) {
 }
 
 // Copy buttons
-var copyButtons = document.getElementsByClassName("copy-btn");
-for (var i = 0; i < copyButtons.length; i++) {
-  copyButtons[i].addEventListener("click", function () {
-    var number =
-      this.parentNode.parentNode.parentNode.querySelector(
-        ".call-number"
-      ).innerText;
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", function () {
+    let number = this.closest(".boxes").querySelector(".call-number").innerText;
     navigator.clipboard.writeText(number);
     alert("📋 নম্বার কপি হয়েছে " + number);
   });
-}
-
-// Call buttons
+});
 
 let coin = 100;
-var calls = document.getElementsByClassName("call-btn");
-var historyContainer = document.querySelector(".history-container");
+let historyContainer = document.querySelector(".history-container");
 
-for (var i = 0; i < calls.length; i++) {
-  calls[i].addEventListener("click", function () {
-    if (coin < 20) {
-      alert("⚠️ Not enough coins!");
-      return;
-    }
+// Call buttons
+document.querySelectorAll(".call-btn").forEach(btn => {
+  btn.addEventListener("click", function () {
+    if (coin < 20) return alert("⚠️ Not enough coins!");
 
-    var box = this.closest(".boxes"); // get parent box
-    var name = box.querySelector(".service-name").innerText;
-    var number = box.querySelector(".call-number").innerText;
+    let box = this.closest(".boxes");
+    let name = box.querySelector(".seba").innerText;
+    let number = box.querySelector(".call-number").innerText;
 
-    alert("📞 Calling " + name + " " + number + "...");
+    alert(`📞 Calling ${name} ${number}...`);
 
     coin -= 20;
     document.getElementById("coin").innerText = coin;
@@ -62,15 +53,35 @@ for (var i = 0; i < calls.length; i++) {
     let entry = document.createElement("div");
     entry.className = "bg-[#FAFAFA] flex justify-between items-center mx-[24px] mb-2";
     entry.innerHTML = `
-      <div class="flex flex-col justify-center items-center gap-2">
-        <h2 class="text-[18px]">${name}</h2>
-        <h3 class="text-[18px] text-gray-400">${number}</h3>
+      <div class="flex flex-col justify-center items-start gap-1">
+        <h2 class="text-[16px] font-semibold">${name}</h2>
+        <h3 class="text-[14px] text-gray-500">${number}</h3>
       </div>
-      <h3 class="font-bold">${new Date().toLocaleTimeString()}</h3>
+      <h3 class="text-[14px] font-bold text-gray-600">${new Date().toLocaleTimeString()}</h3>
     `;
-    historyContainer.appendChild(entry); 
+    historyContainer.appendChild(entry);
   });
-}
+});
 
 
+const clearBtn = document.getElementById("clear-btn");
+clearBtn.addEventListener("click", function () {
 
+  historyContainer.innerHTML = `
+    <div class="flex justify-between items-center p-4 sm:p-6">
+      <div class="flex justify-center items-center gap-2">
+        <i class="fa-solid fa-clock-rotate-left text-[20px] sm:text-[24px]"></i>
+        <h1 class="font-bold text-[16px] sm:text-[20px]">Call History</h1>
+      </div>
+      <div
+        id="clear-btn"
+        class="px-6 py-2 bg-[#00A63E] rounded-[50px] w-[90px] sm:w-[114px] h-[40px] sm:h-[52px] flex justify-center items-center text-white font-bold cursor-pointer"
+      >
+        <h3>Clear</h3>
+      </div>
+    </div>
+  `;
+
+ clearBtn.style.textTransform
+  document.getElementById("clear-btn").addEventListener("click", arguments.callee);
+});
