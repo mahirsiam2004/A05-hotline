@@ -25,7 +25,7 @@ for (let i = 0; i < heart.length; i++) {
 }
 
 // Copy buttons
-document.querySelectorAll(".copy-btn").forEach(btn => {
+document.querySelectorAll(".copy-btn").forEach((btn) => {
   btn.addEventListener("click", function () {
     let number = this.closest(".boxes").querySelector(".call-number").innerText;
     navigator.clipboard.writeText(number);
@@ -37,7 +37,7 @@ let coin = 100;
 let historyContainer = document.querySelector(".history-container");
 
 // Call buttons
-document.querySelectorAll(".call-btn").forEach(btn => {
+document.querySelectorAll(".call-btn").forEach((btn) => {
   btn.addEventListener("click", function () {
     if (coin < 20) return alert("⚠️ Not enough coins!");
 
@@ -51,7 +51,8 @@ document.querySelectorAll(".call-btn").forEach(btn => {
     document.getElementById("coin").innerText = coin;
 
     let entry = document.createElement("div");
-    entry.className = "bg-[#FAFAFA] flex justify-between items-center mx-[24px] mb-2";
+    entry.className =
+      "bg-[#FAFAFA] flex justify-between items-center mx-[24px] mb-2";
     entry.innerHTML = `
       <div class="flex flex-col justify-center items-start gap-1">
         <h2 class="text-[16px] font-semibold">${name}</h2>
@@ -63,10 +64,8 @@ document.querySelectorAll(".call-btn").forEach(btn => {
   });
 });
 
-
 const clearBtn = document.getElementById("clear-btn");
 clearBtn.addEventListener("click", function () {
-
   historyContainer.innerHTML = `
     <div class="flex justify-between items-center p-4 sm:p-6">
       <div class="flex justify-center items-center gap-2">
@@ -82,6 +81,8 @@ clearBtn.addEventListener("click", function () {
     </div>
   `;
 
- clearBtn.style.textTransform
-  document.getElementById("clear-btn").addEventListener("click", arguments.callee);
+  clearBtn.style.textTransform;
+  document
+    .getElementById("clear-btn")
+    .addEventListener("click", arguments.callee);
 });
